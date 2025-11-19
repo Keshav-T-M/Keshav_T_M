@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keshav TM | Full Stack Developer & Data Scientist</title>
+    <meta name="description" content="Portfolio of Keshav TM - Full Stack Developer and Data Science Enthusiast specializing in Python, Flask, and AI integration.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles & Animations -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Custom Animations */
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .animate-scan {
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered delays for grid items */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
+    
+    <script>
+        // Tailwind Configuration for custom colors if needed
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            950: '#020617', // Darker background
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-200 selection:bg-blue-500/30 overflow-x-hidden">
+
+    <!-- BACKGROUND ANIMATION -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[100px] animate-pulse"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-yellow-500/10 blur-[100px] animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-[40%] left-[40%] w-[20%] h-[20%] rounded-full bg-purple-500/10 blur-[120px] animate-pulse" style="animation-delay: 0.7s;"></div>
+        <div class="absolute bottom-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-green-500/5 blur-[100px] animate-pulse" style="animation-delay: 0.5s;"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20 transition-transform group-hover:rotate-12">
+                        K
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white">Keshav<span class="text-blue-500">TM</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-medium uppercase tracking-wider">About</a>
+                    <a href="#skills" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-medium uppercase tracking-wider">Skills</a>
+                    <a href="#experience" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-medium uppercase tracking-wider">Experience</a>
+                    <a href="#projects" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-medium uppercase tracking-wider">Projects</a>
+                    <a href="#contact" class="text-slate-400 hover:text-blue-400 transition-colors text-sm font-medium uppercase tracking-wider">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">About</a>
+                <a href="#skills" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Skills</a>
+                <a href="#experience" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Experience</a>
+                <a href="#projects" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Projects</a>
+                <a href="#contact" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center min-h-screen">
+        <div class="flex-1 z-10 text-center md:text-left reveal-section">
+            <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-500/10 rounded-full border border-blue-500/20">
+                Available for Work
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight">
+                Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Intelligent</span><br />
+                Digital Solutions
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-2xl mx-auto md:mx-0 leading-relaxed">
+                I bridge the gap between <strong>Data Science</strong> and <strong>Full Stack Development</strong>. Expert in Python, Flask, and Machine Learning, I build systems that don't just run—they think.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#projects" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold shadow-lg shadow-blue-600/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    View Projects <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-semibold border border-slate-700 transition-all transform hover:-translate-y-1">
+                    Contact Me
+                </a>
+            </div>
+
+            <div class="mt-12 flex items-center justify-center md:justify-start gap-6 text-slate-400">
+                <a href="https://github.com" target="_blank" rel="noreferrer" class="hover:text-white transition-colors hover:scale-110 transform duration-200"><i data-lucide="github"></i></a>
+                <a href="https://linkedin.com/in/keshav-t-m-125a04251" target="_blank" rel="noreferrer" class="hover:text-blue-400 transition-colors hover:scale-110 transform duration-200"><i data-lucide="linkedin"></i></a>
+                <a href="mailto:keshav.tm01@gmail.com" class="hover:text-green-400 transition-colors hover:scale-110 transform duration-200"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+
+        <!-- Hero Visual/Code Block -->
+        <div class="flex-1 mt-16 md:mt-0 relative z-10 w-full max-w-lg reveal-section delay-200">
+            <div class="relative bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500 group hover:shadow-blue-500/20">
+                <!-- Pseudo-terminal header -->
+                <div class="flex items-center justify-between px-4 py-3 bg-slate-800 border-b border-slate-700">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="mx-auto text-xs text-slate-400 font-mono">main.py (Krishi Jyothi)</div>
+                </div>
+                
+                <!-- Code Content -->
+                <div class="p-6 font-mono text-xs md:text-sm overflow-x-auto bg-slate-900/95">
+                    <div class="text-slate-300">
+                        <span class="text-purple-400">from</span> flask <span class="text-purple-400">import</span> Flask<br/>
+                        <span class="text-purple-400">import</span> tensorflow <span class="text-purple-400">as</span> tf<br/>
+                        <br/>
+                        <span class="text-slate-500"># Initialize AI & Database</span><br/>
+                        app = Flask(__name__)<br/>
+                        model = tf.keras.models.load_model(<span class="text-green-400">'plant_disease.h5'</span>)<br/>
+                        db = firestore.client()<br/>
+                        <br/>
+                        <span class="text-blue-400">@app.route</span>(<span class="text-green-400">"/predict"</span>)<br/>
+                        <span class="text-blue-400">def</span> <span class="text-yellow-200">predict_crop</span>():<br/>
+                        &nbsp;&nbsp;data = request.json<br/>
+                        &nbsp;&nbsp;prediction = model.predict(data)<br/>
+                        &nbsp;&nbsp;<span class="text-purple-400">return</span> jsonify(prediction)<br/>
+                        <br/>
+                        <span class="text-slate-500"># Status: <span class="text-green-400">DEPLOYED 🚀</span></span>
+                    </div>
+                </div>
+                <!-- Animated scan line -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.5)] animate-scan"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 bg-slate-900/50 border-y border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal-section">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                            <i data-lucide="terminal" class="text-blue-500"></i> About Me
+                        </h2>
+                        <p class="text-slate-400 leading-relaxed mb-6">
+                            I am a <strong>Full Stack Developer</strong> and <strong>Data Science Enthusiast</strong> currently pursuing my BCA. Unlike typical developers, I don't just write code; I integrate hardware, AI models, and complex backend logic into seamless web applications.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed">
+                            From building <strong>hybrid Flask-Tkinter systems</strong> for lab management to deploying <strong>AI-powered agricultural platforms</strong>, I specialize in solving real-world problems. My work has been recognized with a Gold Certificate from the Ministry of Electronics & IT.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-6 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500/50 transition-colors group">
+                            <i data-lucide="award" class="text-yellow-500 mb-3 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-xl font-bold text-white">Hackathon Winner</h3>
+                            <p class="text-sm text-slate-400 mt-1">1st Runner-Up at IGNITEX National Hackathon</p>
+                        </div>
+                        <div class="p-6 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500/50 transition-colors group">
+                            <i data-lucide="briefcase" class="text-purple-500 mb-3 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-xl font-bold text-white">3+ Internships</h3>
+                            <p class="text-sm text-slate-400 mt-1">Data Science, Project Mgmt, & Python Dev</p>
+                        </div>
+                        <div class="p-6 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500/50 transition-colors group">
+                            <i data-lucide="code" class="text-blue-500 mb-3 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-xl font-bold text-white">Full Stack</h3>
+                            <p class="text-sm text-slate-400 mt-1">Flask, Firebase, React, Tkinter</p>
+                        </div>
+                        <div class="p-6 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500/50 transition-colors group">
+                            <i data-lucide="cpu" class="text-green-500 mb-3 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-xl font-bold text-white">AI Integrated</h3>
+                            <p class="text-sm text-slate-400 mt-1">Llama-3, TensorFlow, OpenCV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-section">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Technical Arsenal</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Tools and technologies I use to bring ideas to life.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Core Tech -->
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 relative group overflow-hidden hover:border-blue-500/30 transition-all reveal-section delay-100">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-bl-full transition-all group-hover:bg-blue-500/20"></div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2"><i data-lucide="code" class="text-blue-500 w-5 h-5"></i> Core Tech</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">Python (Advanced)</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-blue-500 h-2 rounded-full" style="width: 95%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">JavaScript (ES6+)</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">HTML5 & CSS3</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div></div>
+                        </div>
+                         <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">Java & C</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-blue-500 h-2 rounded-full" style="width: 80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frameworks -->
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 relative group overflow-hidden hover:border-purple-500/30 transition-all reveal-section delay-200">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-purple-500/10 rounded-bl-full transition-all group-hover:bg-purple-500/20"></div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2"><i data-lucide="server" class="text-purple-500 w-5 h-5"></i> Frameworks & DB</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">Flask & Django</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width: 90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">Tkinter (GUI)</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width: 85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">Firebase & MySQL</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width: 85%"></div></div>
+                        </div>
+                         <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm font-medium text-slate-300">TensorFlow/Keras</span></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width: 80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="bg-sl
